@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/1
   def show
-    render json: {list:@photo,user:current_user}
+    render json:@photo
   end
 
   # POST /photos
@@ -19,7 +19,7 @@ class PhotosController < ApplicationController
     @photo = Photo.new(photo_params)
 
     if @photo.save
-      render json: @photo, status: :created, location: @photo
+      render json: {object: @photo ,is_admin:current_user.is_admin,is_user:current_user.is_user} , status: :created, location: @photo
     else
       render json: @photo.errors, status: :unprocessable_entity
     end

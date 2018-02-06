@@ -1,6 +1,5 @@
-
-
 class User < ActiveRecord::Base
+    belongs_to :role
 		has_secure_password
 
 		##Metodos de Knock
@@ -48,5 +47,13 @@ class User < ActiveRecord::Base
         last_name:last_name,
         username:username
       }
+    end
+
+    def is_admin
+      role.name.downcase==Role::ROLE_ADMIN
+    end
+
+    def is_user
+      role.name.downcase==Role::ROLE_USER
     end
 end 
