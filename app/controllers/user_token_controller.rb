@@ -1,7 +1,7 @@
 class UserTokenController < Knock::AuthTokenController
 
 	def create
-  	render json:{token:auth_token,userdata:entity.user_json_data}, status: :created
+  	render json:{userdata:entity.user_json_data,token:auth_token.token}, status: :created
 	end
 	
 end

@@ -2,14 +2,15 @@
 
 class User < ActiveRecord::Base
 		has_secure_password
-		BCrypt::Engine.cost = 4
 
-		def self.from_token_request request
+		##Metodos de Knock
+
+    def self.from_token_request(request)
 			username = request.params["auth"] && request.params["auth"]["username"]
     	self.find_by username: username
 		end
 
-		def self.from_token_payload payload
+		def self.from_token_payload(payload)
     	self.find payload["sub"]
   	end
 
